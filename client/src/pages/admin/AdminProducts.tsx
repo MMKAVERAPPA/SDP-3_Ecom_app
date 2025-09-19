@@ -33,7 +33,7 @@ import { Input } from "@/components/ui/input";
 import Loading from "@/components/shared/Loading";
 import { toast } from "sonner";
 import type { AdminProductType, ProductType } from "@/types";
-import { addProduct, allProducts, editProduct, deleteProduct } from "@/api/api";
+import { addProduct, allProducts,  deleteProduct } from "@/api/api";
 
 const AdminProducts = () => {
   const [products, setProducts] = useState<ProductType[]>([]);
