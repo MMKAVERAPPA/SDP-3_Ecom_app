@@ -28,29 +28,21 @@ public class ProductService {
 		 return productRepository.findById(id).get();
 	 }
 	 
-	 public Product updateProduct(String id,Product product) {
-		 Product oldProduct = productRepository.findById(id)
-		            .orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
-		 if (product.getName() != null) {
-		        oldProduct.setName(product.getName());
-		    }
-		    if (product.getDescription() != null) {
-		        oldProduct.setDescription(product.getDescription());
-		    }
-		    if (product.getCategory() != null) {
-		        oldProduct.setCategory(product.getCategory());
-		    }
-		    if (product.getStock() != 0) { 
-		        oldProduct.setStock(product.getStock());
-		    }
-		    if (product.getPrice() != 0.0) {
-		        oldProduct.setPrice(product.getPrice());
-		    }
-		    if (product.getImage() != null) {
-		        oldProduct.setImage(product.getImage());
-		    }
-		    return productRepository.save(product);
-	 }
+	 public Product updateProduct(String id, Product product) {
+    Product oldProduct = productRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
+
+    if (product.getName() != null) oldProduct.setName(product.getName());
+    if (product.getDescription() != null) oldProduct.setDescription(product.getDescription());
+    if (product.getCategory() != null) oldProduct.setCategory(product.getCategory());
+    if (product.getStock() != 0) oldProduct.setStock(product.getStock());
+    if (product.getPrice() != 0.0f) oldProduct.setPrice(product.getPrice());
+    if (product.getImage() != null) oldProduct.setImage(product.getImage());
+    if (product.getTags() != null) oldProduct.setTags(product.getTags());
+
+    return productRepository.save(oldProduct); // <-- save the updated product
+}
+
 	 
 	 public boolean deleteProduct(String id) {
 		 Optional<Product> optionalProduct = productRepository.findById(id);

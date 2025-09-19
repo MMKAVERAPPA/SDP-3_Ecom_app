@@ -3,11 +3,10 @@ package com.mtd.ecommerce_app.service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Service;
-
 
 import com.mtd.ecommerce_app.dto.OrderDetailsDto;
 import com.mtd.ecommerce_app.dto.OrderStatusDto;
@@ -95,6 +94,29 @@ public class OrderService {
 
 	}
 	
-	
+	  @Autowired
+    private OrderRepository orderRepository;
+
+    // existing methods ...
+
+    public Order updateOrder(String id, Order updatedOrder) {
+        Optional<Order> optionalOrder = orderRepository.findById(id);
+        if(optionalOrder.isPresent()) {
+            Order order = optionalOrder.get();
+
+            // update fields
+            if(updatedOrder.getStatus() != null)
+                order.setStatus(updatedOrder.getStatus());
+
+            if(updatedOrder.getTotalAmount() != 0)
+                order.setTotalAmount(updatedOrder.getTotalAmount());
+
+            if(updatedOrder.getItems() != null)
+                order.setItems(updatedOrder.getItems());
+
+            return orderRepository.save(order);
+        }
+        throw new RuntimeException("Order not found with id " + id);
+    }
 	
 }
