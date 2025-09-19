@@ -27,7 +27,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { ShoppingBag } from "lucide-react";
-import { allOrders, updateOrder } from "@/api/api";
+import { allOrders } from "@/api/api";
 import Loading from "@/components/shared/Loading";
 import { toast } from "sonner";
 
